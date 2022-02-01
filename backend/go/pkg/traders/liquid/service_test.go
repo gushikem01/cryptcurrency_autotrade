@@ -17,10 +17,17 @@ func initService() *liquid.Service {
 	return s
 }
 
-// TestService ...
-func TestService(t *testing.T) {
+// TestProducts ...
+func TestProducts(t *testing.T) {
 	s := initService()
 	t.Run("Service test", func(t *testing.T) {
-		s.Product(context.Background())
+		s.Products(context.Background())
+	})
+}
+
+func TestProductBtcJpy(t *testing.T) {
+	s := initService()
+	t.Run("Service test", func(t *testing.T) {
+		s.ProductBtcJpy(context.Background())
 	})
 }

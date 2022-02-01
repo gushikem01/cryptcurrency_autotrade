@@ -8,5 +8,5 @@ import (
 
 // RepositoryPublic ...
 type RepositoryPublic interface {
-	Product(ctx context.Context) ([]*model.Products, error)
+	Products(ctx context.Context) ([]*model.Products, error)
 }

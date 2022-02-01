@@ -14,7 +14,7 @@ func TestProducts(t *testing.T) {
 	l, _ := zap.NewDevelopment()
 	r := public.NewRepository(l)
 	t.Run("Products get", func(t *testing.T) {
-		productsRes, err := r.Product(context.Background())
+		productsRes, err := r.Products(context.Background())
 		if err != nil {
 			t.Errorf("error: %s", err)
 		}

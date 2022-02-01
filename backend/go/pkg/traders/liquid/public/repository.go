@@ -27,8 +27,8 @@ func NewRepository(l *zap.Logger) liquid.RepositoryPublic {
 	return &repo{conn: conn, Logger: l}
 }
 
-// Product ...
-func (repo *repo) Product(ctx context.Context) ([]*m.Products, error) {
+// Products ...
+func (repo *repo) Products(ctx context.Context) ([]*m.Products, error) {
 
 	var wg sync.WaitGroup
 	var p = []*m.Products{}
