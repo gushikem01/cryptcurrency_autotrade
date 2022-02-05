@@ -8,5 +8,5 @@ import (
 
 // RepositoryPublic ...
 type RepositoryPublic interface {
-	Tickers(ctx context.Context) ([]*model.Ticker, error)
+	Tickers(ctx context.Context, pairs ...string) ([]*model.Ticker, error)
 }

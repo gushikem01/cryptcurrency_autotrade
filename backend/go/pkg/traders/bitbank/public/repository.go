@@ -16,30 +16,55 @@ type repo struct {
 	Logger *zap.Logger
 }
 
-// NewRepository
+// NewRepository ...
 func NewRepository(l *zap.Logger) bitbank.RepositoryPublic {
 	conn := connect.New()
 	return &repo{conn: conn, Logger: l}
 }
 
-// Ticker
-func (repo *repo) Tickers(ctx context.Context) ([]*model.Ticker, error) {
+// Ticker ...
+func (repo *repo) Tickers(ctx context.Context, pairs ...string) ([]*model.Ticker, error) {
 	var wg sync.WaitGroup
 	var t = []*model.Ticker{}
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
+		// API実行
 		ret, err := repo.conn.Get("tickers", nil)
 		if err != nil {
 			repo.Logger.Error(err.Error())
 		}
-		tickerRes := new(model.Ticker)
+		tickerRes := new(model.Res)
 		err = json.Unmarshal(ret, tickerRes)
 		if err != nil {
 			repo.Logger.Error(err.Error())
 		}
-		t = append(t, tickerRes)
+		// 絞り込み
+		t = repo.filter(ctx, tickerRes, pairs...)
 	}()
 	wg.Wait()
+
 	return t, nil
+}
+
+// filter ...
+func (repo *repo) filter(ctx context.Context, res *model.Res, pairs ...string) []*model.Ticker {
+	var t = []*model.Ticker{}
+	for _, v := range res.Data {
+		if contains(v.Pair, pairs...) {
+			m := model.Change(v)
+			t = append(t, m)
+		}
+	}
+	return t
+}
+
+// contains ...
+func contains(pair string, pairs ...string) bool {
+	for _, v := range pairs {
+		if v == pair {
+			return true
+		}
+	}
+	return false
 }

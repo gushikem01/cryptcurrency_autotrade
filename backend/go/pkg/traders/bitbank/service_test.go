@@ -21,6 +21,6 @@ func initService() *bitbank.Service {
 func TestTicker(t *testing.T) {
 	s := initService()
 	t.Run("Service test", func(t *testing.T) {
-		s.Ticker(context.Background())
+		s.Tickers(context.Background(), "btc_jpy")
 	})
 }

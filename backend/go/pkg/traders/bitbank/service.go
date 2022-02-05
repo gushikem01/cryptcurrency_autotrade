@@ -19,8 +19,8 @@ func NewService(logger *zap.Logger, repo RepositoryPublic) *Service {
 }
 
 // Ticker ...
-func (s *Service) Ticker(ctx context.Context) ([]*model.Ticker, error) {
-	m, err := s.repo.Tickers(ctx)
+func (s *Service) Tickers(ctx context.Context, pairs ...string) ([]*model.Ticker, error) {
+	m, err := s.repo.Tickers(ctx, pairs...)
 	if err != nil {
 		return nil, err
 	}
