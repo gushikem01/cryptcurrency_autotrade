@@ -3,6 +3,9 @@ package traderscobra
 import (
 	"context"
 
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitbank"
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitflayer"
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/btcbox"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/coincheck"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/gmo"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/liquid"
@@ -16,6 +19,9 @@ type Cmd struct {
 	coincheckSrv *coincheck.Service
 	gmoSrv       *gmo.Service
 	liquidSrv    *liquid.Service
+	bitbankSrv   *bitbank.Service
+	btcboxSrv    *btcbox.Service
+	bitflayer    *bitflayer.Service
 }
 
 // NewCmd コマンド作成
@@ -24,8 +30,11 @@ func NewCmd(
 	coincheckSrv *coincheck.Service,
 	gmoSrv *gmo.Service,
 	liquidSrv *liquid.Service,
+	bitbankSrv *bitbank.Service,
+	btcboxSrv *btcbox.Service,
+	bitflayerSrv *bitflayer.Service,
 ) *Cmd {
-	return &Cmd{logger, coincheckSrv, gmoSrv, liquidSrv}
+	return &Cmd{logger, coincheckSrv, gmoSrv, liquidSrv, bitbankSrv, btcboxSrv, bitflayerSrv}
 }
 
 // Run ...

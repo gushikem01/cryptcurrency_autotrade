@@ -1,0 +1,17 @@
+{
+  "product_code": "BTC_JPY",
+  "state": "RUNNING",
+  "timestamp": "2022-02-06T13:34:10.647",
+  "tick_id": 14475304,
+  "best_bid": 4805813.0,
+  "best_ask": 4807250.0,
+  "best_bid_size": 0.3805,
+  "best_ask_size": 0.005713,
+  "total_bid_depth": 762.54184425,
+  "total_ask_depth": 559.31631327,
+  "market_bid_size": 0.0,
+  "market_ask_size": 0.0,
+  "ltp": 4807250.0,
+  "volume": 6196.3145929,
+  "volume_by_product": 1588.2998954
+}

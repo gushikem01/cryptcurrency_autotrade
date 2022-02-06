@@ -9,6 +9,12 @@ package di
 import (
 	"context"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/log"
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitbank"
+	public4 "github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitbank/public"
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitflayer"
+	public6 "github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitflayer/public"
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/btcbox"
+	public5 "github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/btcbox/public"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/coincheck"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/coincheck/public"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/gmo"
@@ -21,6 +27,7 @@ import (
 
 // Injectors from wire.go:
 
+// InilializeTask ...
 func InilializeTask(ctx context.Context) (*appcobra.CLI, func(), error) {
 	logger, err := log.NewZap()
 	if err != nil {
@@ -32,7 +39,13 @@ func InilializeTask(ctx context.Context) (*appcobra.CLI, func(), error) {
 	gmoService := gmo.NewService(logger, gmoRepositoryPublic)
 	liquidRepositoryPublic := public3.NewRepository(logger)
 	liquidService := liquid.NewService(logger, liquidRepositoryPublic)
-	cmd := traderscobra.NewCmd(logger, service, gmoService, liquidService)
+	bitbankRepositoryPublic := public4.NewRepository(logger)
+	bitbankService := bitbank.NewService(logger, bitbankRepositoryPublic)
+	btcboxRepositoryPublic := public5.NewRepository(logger)
+	btcboxService := btcbox.NewService(logger, btcboxRepositoryPublic)
+	bitflayerRepositoryPublic := public6.NewRepository(logger)
+	bitflayerService := bitflayer.NewService(logger, bitflayerRepositoryPublic)
+	cmd := traderscobra.NewCmd(logger, service, gmoService, liquidService, bitbankService, btcboxService, bitflayerService)
 	cli := appcobra.NewCLI(cmd)
 	return cli, func() {
 	}, nil

@@ -8,6 +8,12 @@ import (
 
 	"github.com/google/wire"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/log"
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitbank"
+	bitbankpublic "github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitbank/public"
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitflayer"
+	bitflayerpublic "github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/bitflayer/public"
+	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/btcbox"
+	btcboxpublic "github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/btcbox/public"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/coincheck"
 	coincheckpublic "github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/coincheck/public"
 	"github.com/gushikem01/cryptcurrency_autotrade/pkg/traders/gmo"
@@ -28,6 +34,12 @@ func InilializeTask(ctx context.Context) (*appcobra.CLI, func(), error) {
 		coincheckpublic.NewRepository,
 		gmo.NewService,
 		gmopublic.NewRepository,
+		bitbank.NewService,
+		bitbankpublic.NewRepository,
+		btcbox.NewService,
+		btcboxpublic.NewRepository,
+		bitflayer.NewService,
+		bitflayerpublic.NewRepository,
 		traderscobra.NewCmd,
 		appcobra.NewCLI,
 	)
